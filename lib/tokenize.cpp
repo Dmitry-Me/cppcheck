@@ -5237,15 +5237,15 @@ void Tokenizer::simplifyVarDecl(Token * tokBegin, Token * tokEnd, bool only_k_r_
             for (Token *tok3 = tok2; tok3; tok3 = tok3->next()) {
                 ++typelen;
 
-                if (tok3->str() == "<" && !parens) {
+                if (!parens && tok3->str() == "<") {
                     ++indentlevel;
-                } else if (tok3->str() == ">" && !parens) {
+                } else if (!parens && tok3->str() == ">") {
                     if (indentlevel == 0) {
                         tok2 = tok3->next();
                         break;
                     }
                     --indentlevel;
-                } else if (tok3->str() == ">>" && !parens) {
+                } else if (!parens && tok3->str() == ">>") {
                     if (indentlevel <= 1U) {
                         tok2 = tok3->next();
                         break;
